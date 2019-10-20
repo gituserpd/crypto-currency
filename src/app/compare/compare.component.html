@@ -1,0 +1,77 @@
+<div class="container-fluid main" style="padding: 20px;">
+
+  <div class="card-group">
+
+    <div class="card text-white bg-dark card-for-title">
+      <div class="card-body title-bar">
+        <h5 class="align-middle">
+          <a class="float-left back-btn" (click)="goBackPreviousPgae()">&#8592;</a>
+          General</h5>
+      </div>
+      <ul class="list-group bg-dark list-group-flush title-bar over-flow">
+        <li class="list-group-item">Market Cap</li>
+        <li class="list-group-item">Price ({{convert}})</li>
+        <li class="list-group-item">Volume in 24H</li>
+        <li class="list-group-item">Change in 1H</li>
+        <li class="list-group-item">Change in 24H</li>
+        <li class="list-group-item">Change in 7D</li>
+      </ul>
+      <div class="card-footer text-muted">
+        Last Updated
+      </div>
+    </div>
+
+    <a class="float-left back-btn arrow-for-mobile" (click)="goBackPreviousPgae()"><h4>&#8592;</h4></a>
+    
+    <div class="card text-white bg-dark" *ngFor="let comp of compareData | values">
+      <!--style="width: 18rem;"-->
+
+      <div class="card-body">
+        <div class="media">
+          <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{comp.id}}.png" class="mr-3" alt="...">
+          <div class="media-body">
+            <h3 class="mt-0 text-info" style="text-shadow: -2px 2px 3px green;">{{comp.name}}</h3>
+            <h5>CMK Rank : {{comp.cmc_rank}}</h5>
+          </div>
+        </div>
+        <hr>
+        <h5 class="card-title">Circulating Supply</h5>
+        <p class="card-text">{{comp.circulating_supply}}</p>
+        <hr>
+        <h5 class="card-title">Max Supply</h5>
+        <p class="card-text">{{comp.max_supply}}</p>
+        <hr>
+        <h5 class="card-title">Num Market Pairs</h5>
+        <p class="card-text">{{comp.num_market_pairs}}</p>
+      </div>
+
+      <ul class="list-group list-group-flush text-info" *ngFor="let c of comp.quote | values">
+        <li class="list-group-item"><span class="title-for-mobile">Market Cap: </span>{{c.market_cap}}</li>
+        <li class="list-group-item"><span class="title-for-mobile">Price ({{convert}}): </span>{{c.price}}</li>
+        <li class="list-group-item"><span class="title-for-mobile">Volume in 24H: </span>{{c.volume_24h}}</li>
+        <li class="list-group-item"><span class="title-for-mobile">Change in 1H: </span>{{c.percent_change_1h}} %</li>
+        <li class="list-group-item"><span class="title-for-mobile">Change in 24H: </span>{{c.percent_change_24h}} %</li>
+        <li class="list-group-item"><span class="title-for-mobile">Change in 7D: </span>{{c.percent_change_7d}} %</li>
+      </ul>
+
+      <div class="card-footer text-muted">
+        {{comp.last_updated | date}}
+      </div>
+    </div>
+    <!--Card colse-->
+
+    <div *ngIf="success==-1" style="padding: 100px; text-align: center;">
+      <img src="assets/error.png" style="width: 8rem; height: 8rem;">
+      <p class="text-danger">Something Wrong ! <button class="btn btn-link" (click)="reload()">RELOAD</button></p>
+    </div>
+    <div *ngIf="success==0" style="padding: 50px; text-align: center;">
+      <div class="spinner-border text-secondary" style="width: 8rem; height: 8rem;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <p class="text-secondary">Getting Response From Server...</p>
+    </div>
+
+  </div>
+  <!--card group-->
+
+</div>

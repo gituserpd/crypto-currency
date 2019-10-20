@@ -1,0 +1,18 @@
+
+* {
+    font-family: "Calibri Light";
+}
+
+/* * h1, h2, h3, h4, h5, h6{
+    font-family: "Calibri";
+} */
+.test{
+    border:1px dotted red;
+}
+
+nav ul{
+    width: 100%;
+}
+nav ul li{
+    margin-right:50px;
+}

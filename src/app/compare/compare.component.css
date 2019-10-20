@@ -1,0 +1,67 @@
+.test{ border: 1px dotted red }
+
+.main{
+    background:#102A3C url("../../assets/compare_view.jpg");
+    /* background-size:cover; */
+    background-repeat: repeat;
+    /* background-attachment: fixed; */
+    background-position:100% 0;
+    max-width: 100vw;
+    min-height: 100vh;
+    /* color: azure; */
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.title-bar{
+    color:orange;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    text-shadow: -1px 1px 1px black;
+}
+
+a.back-btn{
+    color:white;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+h5{
+    text-shadow: -2px 2px 2px black;
+}
+
+.card-for-title{
+    max-width: 18rem;
+}
+a.arrow-for-mobile{
+    display:none;
+    color: orange;
+    text-shadow: -1px 1px 1px black;
+}
+.title-for-mobile{
+    display:none;
+    color: orange;
+    text-shadow: -1px 1px 1px black;
+}
+
+
+
+@media only screen and (max-width:575px){
+    a.arrow-for-mobile{
+        display: block;
+        color: orange;
+        text-shadow: -1px 1px 1px black;
+    }
+    .card-for-title{
+        display: none;
+    }
+    .title-for-mobile{
+        display: block;
+    }
+}
+
+@media only screen and (max-width:674px){
+   .over-flow{
+       overflow: scroll;
+   }
+}

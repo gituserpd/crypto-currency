@@ -1,0 +1,63 @@
+<div class="container-fluid main">
+
+  <div class="container" style="padding:20px 0">
+
+    <ul class="list-group col-sm-12">
+
+      <li class="list-group-item custom-item-title">
+          <a class="float-left back-btn" (click)="goBackPreviousPgae()">&#8592;</a>
+          General Information</li>
+      <li class="list-group-item bg-light">
+          <div *ngIf="success_1!==1" class="d-flex justify-content-center">
+            <div class="spinner-border text-secondary  m-5" role="status" style="width: 3.5rem; height: 3.5rem;">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <div class="media position-relative" *ngFor="let info of coinInfo | values"> 
+            <div class="media-body">
+              <img class="float-left mr-3" src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{coinId}}.png" width="150px"
+                height="150px">
+                <h3 class="mt-0 text-info">{{info.name}}</h3>
+                <p>{{info.description}}</p>
+                <p><b>Category:-</b> {{info.category}}</p>
+                <a href="{{info.urls.website}}" target="_blank" class="">Visit: {{info.urls.website}}</a>
+            </div>
+          </div>
+      </li>
+
+      <div *ngFor="let coin of coinData | values">
+        
+        <div *ngFor="let q of coin.quote | values">
+            <li class="list-group-item custom-item-title">Market Cap</li>
+            <li class="list-group-item custom-item-page">{{q.market_cap}}</li>
+            <li class="list-group-item custom-item-title">Price ({{convertType}})</li>
+            <li class="list-group-item custom-item-page">{{q.price}}</li>
+            <li class="list-group-item custom-item-title">Volume in 24 Hour</li>
+            <li class="list-group-item custom-item-page">{{q.volume_24h}}</li>
+            <li class="list-group-item custom-item-title">Percent Change in Last</li>
+            <li class="list-group-item custom-item-page">1 Hour
+              <span class="badge-pill float-right">{{q.percent_change_1h}} %</span></li>
+            <li class="list-group-item custom-item-page">24 Hour
+              <span class="badge-pill float-right">{{q.percent_change_24h}} %</span></li>
+            <li class="list-group-item custom-item-page">7 Days
+              <span class="badge-pill float-right">{{q.percent_change_7d}} %</span></li>      
+        </div>
+      
+      <li class="list-group-item custom-item-title">Max Supply</li>
+      <li class="list-group-item custom-item-page">{{coin.max_supply}}</li>
+      <li class="list-group-item custom-item-title">Circulating Supply</li>
+      <li class="list-group-item custom-item-page">{{coin.circulating_supply}}</li>
+      <li class="list-group-item custom-item-title">Total Supply</li>
+      <li class="list-group-item custom-item-page">{{coin.total_supply}}</li>
+      <li class="list-group-item custom-item-title">Last Updated</li>
+      <li class="list-group-item custom-item-page">{{coin.last_updated | date}}</li>
+      </div>
+    </ul>
+
+  </div>
+
+
+
+
+</div>
+<!--CLOSED MAIN CONTAINER-->

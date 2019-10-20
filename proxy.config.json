@@ -1,0 +1,8 @@
+{
+    "/v1/*": {
+        "target": "https://pro-api.coinmarketcap.com/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

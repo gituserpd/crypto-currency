@@ -1,0 +1,348 @@
+<div class="container-fluid main">
+
+    <div class="container-fuid" style="padding-top: 20px; padding-bottom: 20px;">
+
+        <div class="accordion" id="accordionExample">
+            <nav class="navbar navbar-light card back-opac">
+
+                <form #apiByForm="ngForm" (ngSubmit)="allCryptoData()" class="form-inline col-12 nav-pills nav-fill">
+                    <div class="input-group">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="all" name="crypto_type"
+                                [(ngModel)]="crypto_type" value="all">
+                            <label class="custom-control-label" for="all">ALL</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="coin" name="crypto_type"
+                                [(ngModel)]="crypto_type" value="coins">
+                            <label class="custom-control-label" for="coin">COINS</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="token" name="crypto_type"
+                                [(ngModel)]="crypto_type" value="tokens">
+                            <label class="custom-control-label" for="token">TOKENS</label>
+                        </div>
+                    </div>
+                    <div class="input-group nav-item">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">CONVERT</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01" name="convert" [(ngModel)]="convert"
+                            #curr="ngModel">
+                            <option value="USD">United States Dollar</option>
+                            <option value="AUD">Australian Dollar</option>
+                            <option value="BDT">Bangladeshi Taka</option>
+                            <option value="BMD">Bermudan Dollar</option>
+                            <option value="BRL">Brazilian Real</option>
+                            <option value="BGN">Bulgarian Lev</option>
+                            <option value="KHR">Cambodian Riel</option>
+                            <option value="CAD">Canadian Dollar</option>
+                            <option value="CNY">Chinese Yuan</option>
+                            <option value="COP">Colombian Peso</option>
+                            <option value="DKK">Danish Krone</option>
+                            <option value="EGP">Egyptian Pound</option>
+                            <option value="EUR">Euro</option>
+                            <option value="HKD">Hong Kong Dollar</option>
+                            <option value="HUF">Hungarian Forint</option>
+                            <option value="ISK">Icelandic Króna</option>
+                            <option value="INR">Indian Rupee</option>
+                            <option value="IDR">Indonesian Rupiah</option>
+                            <option value="IRR">Iranian Rial</option>
+                            <option value="IQD">Iraqi Dinar</option>
+                            <option value="ILS">Israeli New Shekel</option>
+                            <option value="JMD">Jamaican Dollar</option>
+                            <option value="JPY">Japanese Yen</option>
+                            <option value="JOD">Jordanian Dinar</option>
+                            <option value="KZT">Kazakhstani Tenge</option>
+                            <option value="KES">Kenyan Shilling</option>
+                            <option value="KWD">Kuwaiti Dinar</option>
+                            <option value="KGS">Kyrgystani Som</option>
+                            <option value="MYR">Malaysian Ringgit</option>
+                            <option value="MUR">Mauritian Rupee </option>
+                            <option value="MXN">Mexican Peso </option>
+                            <option value="MNT">Mongolian Tugrik </option>
+                            <option value="MAD">Moroccan Dirham</option>
+                            <option value="MMK">Myanma Kyat </option>
+                            <option value="NAD">Namibian Dollar </option>
+                            <option value="NPR">Nepalese Rupee </option>
+                            <option value="TWD">New Taiwan Dollar </option>
+                            <option value="NZD">New Zealand Dollar </option>
+                            <option value="NOK">Norwegian Krone </option>
+                            <option value="OMR">Omani Rial </option>
+                            <option value="PKR">Pakistani Rupee </option>
+                            <option value="PHP">Philippine Peso </option>
+                            <option value="GBP">Pound Sterling </option>
+                            <option value="QAR">Qatari Rial </option>
+                            <option value="RON">Romanian Leu </option>
+                            <option value="RUB">Russian Ruble </option>
+                            <option value="SAR">Saudi Riyal </option>
+                            <option value="RSD">Serbian Dinar </option>
+                            <option value="SGD">Singapore Dollar </option>
+                            <option value="ZAR">South African Rand </option>
+                            <option value="KRW">South Korean Won </option>
+                            <option value="SSP">South Sudanese Pound </option>
+                            <option value="LKR">Sri Lankan Rupee</option>
+                            <option value="SEK">Swedish Krona </option>
+                            <option value="CHF">Swiss Franc</option>
+                            <option value="THB">Thai Baht</option>
+                            <option value="TTD">Trinidad and Tobago Dollar</option>
+                            <option value="TND">Tunisian Dinar </option>
+                            <option value="TRY">Turkish Lira </option>
+                            <option value="UGX">Ugandan Shilling</option>
+                            <option value="UAH">Ukrainian Hryvnia </option>
+                            <option value="AED">United Arab Emirates Dirham</option>
+                            <option value="UYU">Uruguayan Peso </option>
+                            <option value="UZS">Uzbekistan Som </option>
+                            <option value="VND">Vietnamese Dong </option>
+                        </select>
+                        <div class="input-group-append">
+                            <label class="input-group-text">{{convert}}</label>
+                        </div>
+                    </div>
+                    <div class="input-group nav-item">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect02">SORT BY</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect02" name="sortBy" [(ngModel)]="sortBy">
+                            <option value="market_cap">Market Cap</option>
+                            <option value="price">Price</option>
+                            <option value="name">Name</option>
+                        </select>
+                    </div>
+                    <div class="input-group" id="headingOne">
+                        <button class="btn btn-primary nav-item" (click)="apiByForm.ngSubmit.emit()" type="submit"
+                            style="margin:auto 0">UPDATE</button>
+                    </div>
+                </form>
+
+            </nav>
+        </div><!-- accordion CLOSED HERE -->
+
+        <!-- BUTTONS GROUP -->
+        <nav class="back-opac container-fluid" style="padding:10px;">
+            <div class=" d-flex justify-content-between">
+                <div class="input-group d-flex justify-content-start">
+                    <button type="button" class="btn-action nav-item btn-favorite" (click)="allFavoriteData()">
+                        <img src="assets/favorite.png" width="18px" height="15px"> MY FAVORITE</button>
+                    <button type="button" class="btn-action nav-item btn-favorite" (click)="removeFromFavorite()"
+                        *ngIf="rmFavBtn==1" [disabled]="selectedItem.length==0">
+                            <img src="assets/rm_favorite.png" width="18px" height="15px"> REMOVE</button>
+                    <button type="button" class="btn-action nav-item btn-favorite" (click)="addToFavorite()"
+                        *ngIf="rmFavBtn==0" [disabled]="selectedItem.length==0">
+                        <img src="assets/add_favorite.png" width="18px" height="15px"> ADD FAVORITE</button>
+                    <button type="button" class="btn-action nav-item btn-compare" (click)="compareSelected()"
+                        [disabled]="selectedItem.length!=2">
+                        <img src="assets/compare.png" width="18px" height="15px"> COMPARE</button>
+                </div>
+                <div class="d-inline-flex justify-content-end" style="color:black">
+                    <button class="btn btn-sm btn-light" style="margin: auto 5px;" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        FILTER
+                    </button>
+                    <a href="" class="btn btn-sm btn-light" style="margin: auto 5px;">REFRESH</a>
+                </div>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample"
+                style="padding: 5px;">
+                <form class="card-body form-inline nav-pills nav-fill">
+                    <div class="input-group nav-item">
+                        <label for="priceRange" class="range_op">PRICE : {{price_range}} {{convert}}</label>
+                        <input type="range" class="custom-range" min="0" max="2000000" id="priceRange"
+                            name="price_range" [(ngModel)]="price_range">
+                    </div>
+                    <div class="input-group nav-item">
+                        <button class="btn btn-sm btn-outline-secondary" type="button"
+                            (click)="doFilterPrice(price_range)" disabled>APPLY</button>
+                    </div>
+                    <div class="input-group nav-item">
+                        <label for="marketcapRange" class="range_op">MARKETCAP : {{market_range}}</label>
+                        <input type="range" class="custom-range" min="0" max="20000000000000" id="marketcapRange"
+                            name="market_range" [(ngModel)]="market_range">
+                    </div>
+                    <div class="input-group nav-item">
+                        <button class="btn btn-sm btn-outline-secondary" type="button"
+                            (click)="doFilterMarket(market_range)" disabled>APPLY</button>
+                    </div>
+                </form>
+            </div>
+        </nav>
+
+        <!-- <p>
+        longPress: {{longPress}}
+        <br>
+        longPressing: {{longPressing}}
+    </p> -->
+        <!--  (click)="detailView(crypto.id,convert)" -->
+
+        <!--FOR DISPLAY TABLE DATA -->
+
+        <div class="display-list back-opac">
+
+            <!-- TABLE -->
+            <!--OLD TABLE
+          <table celspacing=5px>
+              <tr>
+                  <th><span class="text-white close-check"> X </span></th>
+                  <th colspan="3" style="text-align: center;">NAME</th>
+                  <th>MARKET CAP</th>
+                  <th>PRICE ({{convert}})</th>
+                  <th>CHANGE % 1H</th>
+              </tr>
+              <tbody *ngIf="favoriteIds.length>0" style="border-left:2px solid red">
+                    <tr *ngFor="let fav of favoriteData | values" class="tr-click">
+                        <td></td>
+                        <td class="txt-center">
+                            <img (click)="removeFromFavorite(fav.id)" class="fav-img" src="assets/heart_on.png" width="15px" height=15px  data-toggle="tooltip" title="REMOVE FROM FAVORITE">
+                        </td>
+                        <td class="txt-right"><img class="coin-logo" src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{fav.id}}.png" width="25px" height="25px"></td>
+                        <td class="name" data-toggle="tooltip" title="CLICK TO OPEN">
+                            {{fav.name}}
+                            <img class="float-right" src="assets/pointer.png" width="18px" height="15px">
+                        </td>
+                        <td *ngFor="let ele of fav.quote | values">{{ele.market_cap}}</td>
+                        <td *ngFor="let ele of fav.quote | values">{{ele.price}}</td>
+                        <td *ngFor="let ele of fav.quote | values">
+                            <span [ngStyle]="getStyle(ele.percent_change_1h)">{{ele.percent_change_1h}}</span>
+                          </td>
+                    </tr>
+            </tbody>
+            <tbody *ngIf="allData.length>0">
+              <tr *ngFor="let crypto of allData" class="tr-click">
+                  <td>
+                      <input type="checkbox" (change)="checkSelected(crypto.id)" id="crypto.id">
+                    </td>
+                  <td class="txt-center">
+                      <fav-logo [coinId]="crypto.id" [favIds]="favoriteIds"></fav-logo>
+                  </td>
+                  <td class="txt-right"><img class="coin-logo" src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{crypto.id}}.png" width="25px" height="25px"></td>
+                  <td class="name" data-toggle="tooltip" title="CLICK TO OPEN" (click)="detailView(crypto.id,convert)">
+                    {{crypto.name}}
+                    <img class="float-right" src="assets/pointer.png" width="18px" height="15px">
+                  </td>
+                  <td *ngFor="let ele of crypto.quote | values">{{ele.market_cap}}</td>
+                  <td *ngFor="let ele of crypto.quote | values">{{ele.price}}</td>
+                  <td *ngFor="let ele of crypto.quote | values">
+                      <span [ngStyle]="getStyle(ele.percent_change_1h)">{{ele.percent_change_1h}}</span>
+                    </td>
+              </tr>
+            </tbody>
+          </table>
+-->
+
+
+            <div>
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                    <ng-container matColumnDef="check">
+                        <th mat-header-cell *matHeaderCellDef><!--span class="text-white close-check" (click)="addCheckBehave()"> X </span--></th>
+                        <td class="text-center" mat-cell *matCellDef="let element">
+                            <input type="checkbox" class="select-item" (change)="checkSelected(element.id)" id="element.id">
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="fav">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td class="text-center" mat-cell *matCellDef="let element">
+                            <fav-logo [coinId]="element.id" [favIds]="favoriteIds"></fav-logo></td>
+                    </ng-container>
+                    <ng-container matColumnDef="logo">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td class="txt-right" mat-cell *matCellDef="let element">
+                            <img class="coin-logo" src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{element.id}}.png" width="25px" height="25px"/>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                        <td mat-cell *matCellDef="let element"
+                        class="name" data-toggle="tooltip" title="CLICK TO OPEN" (click)="detailView(element.id,convert)">
+                         {{element.name}}
+                         <img class="float-right" src="assets/pointer.png" width="18px" height="15px"></td>
+                    </ng-container>
+                    <ng-container matColumnDef="market_cap">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Market Cap </th>
+                        <td mat-cell *matCellDef="let element">
+                                <span *ngFor="let i of element.quote | values">
+                                    {{i.market_cap}}
+                            </span></td>
+                    </ng-container>
+                    <ng-container matColumnDef="price">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price ({{convert}})</th>
+                        <td mat-cell *matCellDef="let element">
+                                <span *ngFor="let i of element.quote | values">
+                                    {{i.price}}
+                            </span></td>
+                    </ng-container>
+                    <ng-container matColumnDef="change">
+                        <th mat-header-cell *matHeaderCellDef>Change in 1H </th>
+                        <td mat-cell *matCellDef="let element">
+                            <span *ngFor="let i of element.quote | values" [ngStyle]="getStyle(i.percent_change_1h)">
+                                {{i.percent_change_1h}}
+                            </span></td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr class="tr-click" (click)="removeCheckBehave()" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                </table>
+
+                <!-- Spinners -->
+                <div *ngIf="success==-1" style="padding: 50px; text-align: center;">
+                    <img src="assets/error.png" style="width: 4rem; height: 4rem;">
+                    <p class="text-danger">Something Wrong ! <a href="/">RELOAD</a></p>
+                </div>
+                <div *ngIf="success==0" style="padding: 50px; text-align: center;">
+                    <div class="spinner-border text-secondary" style="width: 4rem; height: 4rem;" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="text-white-50">Getting Response From Server...</p>
+                </div>
+
+                <mat-paginator [pageSizeOptions]="[10, 25, 50, 75, 100]" (page)="clearSelected()"></mat-paginator>
+                <!--showFirstLastButtons-->
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- SPINNERS OR LOADERS -->
+
+            <!-- <div *ngIf="success==1 && favoriteData.length==0" style="padding: 50px; text-align: center;">
+            <div class="spinner-border text-success" style="width: 4rem; height: 4rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <p class="text-success">Getting Data Ready...</p>
+        </div> -->
+
+
+
+            <nav style="padding:10px;">
+                <div class="input-group input-group-sm d-inline-flex justify-content-end">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Total {{allData.length}} items
+                            loaded:</span>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-light" type="button" id="button-addon2" (click)="loadMore()"
+                            [disabled]="loadMoreBtn!=1">
+                            LOAD 100 MORE</button>
+                    </div>
+                </div>
+            </nav>
+
+
+        </div>
+
+
+    </div><!-- CLOSE CONTAINETR -->
+
+
+
+
+
+</div>
