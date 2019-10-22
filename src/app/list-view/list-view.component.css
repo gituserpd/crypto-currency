@@ -88,6 +88,9 @@ table th .close-check{
     border-radius: 5px;
     /* visibility: hidden; */
 }
+table th .close-check:hover{
+    box-shadow: 0 0 5px white;
+}
 .display-list table{
     width:100%;
 }
