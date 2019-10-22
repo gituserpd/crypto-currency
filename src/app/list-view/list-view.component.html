@@ -146,22 +146,27 @@
                 style="padding: 5px;">
                 <form class="card-body form-inline nav-pills nav-fill">
                     <div class="input-group nav-item">
-                        <label for="priceRange" class="range_op">PRICE : {{price_range}} {{convert}}</label>
-                        <input type="range" class="custom-range" min="0" max="2000000" id="priceRange"
-                            name="price_range" [(ngModel)]="price_range">
+                        <label for="priceRange" class="range_op">PRICE : {{price_range}}</label>
+                        <input type="range" class="custom-range" min="0" max="1000" id="priceRange"
+                            name="price_range" [(ngModel)]="price_range" (change)="doFilterPrice(price_range)">
                     </div>
-                    <div class="input-group nav-item">
+                    <!-- <div class="input-group nav-item">
                         <button class="btn btn-sm btn-outline-secondary" type="button"
                             (click)="doFilterPrice(price_range)" disabled>APPLY</button>
-                    </div>
+                    </div> -->
                     <div class="input-group nav-item">
                         <label for="marketcapRange" class="range_op">MARKETCAP : {{market_range}}</label>
-                        <input type="range" class="custom-range" min="0" max="20000000000000" id="marketcapRange"
-                            name="market_range" [(ngModel)]="market_range">
+                        <input type="range" class="custom-range" min="0" max="10000" id="marketcapRange"
+                            name="market_range" [(ngModel)]="market_range" (change)="doFilterMarket(market_range)">
                     </div>
-                    <div class="input-group nav-item">
+                    <!-- <div class="input-group nav-item">
                         <button class="btn btn-sm btn-outline-secondary" type="button"
                             (click)="doFilterMarket(market_range)" disabled>APPLY</button>
+                    </div> -->
+                    <div class="input-group nav-item">
+                        <label for="name_filter" class="range_op" style="min-width: 100px;">FIND NAME</label>
+                        <input type="text" name="nameFilter" [(ngModel)]="nameFilter" 
+                        (keyup)="doFilterName($event.target.value)" id="name_filter" style="border-radius: 10px; margin-left: 5px; background: rgb(186, 253, 244);">
                     </div>
                 </form>
             </div>
@@ -171,69 +176,16 @@
         longPress: {{longPress}}
         <br>
         longPressing: {{longPressing}}
-    </p> -->
-        <!--  (click)="detailView(crypto.id,convert)" -->
+        </p> -->
 
         <!--FOR DISPLAY TABLE DATA -->
 
         <div class="display-list back-opac">
 
-            <!-- TABLE -->
-            <!--OLD TABLE
-          <table celspacing=5px>
-              <tr>
-                  <th><span class="text-white close-check"> X </span></th>
-                  <th colspan="3" style="text-align: center;">NAME</th>
-                  <th>MARKET CAP</th>
-                  <th>PRICE ({{convert}})</th>
-                  <th>CHANGE % 1H</th>
-              </tr>
-              <tbody *ngIf="favoriteIds.length>0" style="border-left:2px solid red">
-                    <tr *ngFor="let fav of favoriteData | values" class="tr-click">
-                        <td></td>
-                        <td class="txt-center">
-                            <img (click)="removeFromFavorite(fav.id)" class="fav-img" src="assets/heart_on.png" width="15px" height=15px  data-toggle="tooltip" title="REMOVE FROM FAVORITE">
-                        </td>
-                        <td class="txt-right"><img class="coin-logo" src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{fav.id}}.png" width="25px" height="25px"></td>
-                        <td class="name" data-toggle="tooltip" title="CLICK TO OPEN">
-                            {{fav.name}}
-                            <img class="float-right" src="assets/pointer.png" width="18px" height="15px">
-                        </td>
-                        <td *ngFor="let ele of fav.quote | values">{{ele.market_cap}}</td>
-                        <td *ngFor="let ele of fav.quote | values">{{ele.price}}</td>
-                        <td *ngFor="let ele of fav.quote | values">
-                            <span [ngStyle]="getStyle(ele.percent_change_1h)">{{ele.percent_change_1h}}</span>
-                          </td>
-                    </tr>
-            </tbody>
-            <tbody *ngIf="allData.length>0">
-              <tr *ngFor="let crypto of allData" class="tr-click">
-                  <td>
-                      <input type="checkbox" (change)="checkSelected(crypto.id)" id="crypto.id">
-                    </td>
-                  <td class="txt-center">
-                      <fav-logo [coinId]="crypto.id" [favIds]="favoriteIds"></fav-logo>
-                  </td>
-                  <td class="txt-right"><img class="coin-logo" src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{crypto.id}}.png" width="25px" height="25px"></td>
-                  <td class="name" data-toggle="tooltip" title="CLICK TO OPEN" (click)="detailView(crypto.id,convert)">
-                    {{crypto.name}}
-                    <img class="float-right" src="assets/pointer.png" width="18px" height="15px">
-                  </td>
-                  <td *ngFor="let ele of crypto.quote | values">{{ele.market_cap}}</td>
-                  <td *ngFor="let ele of crypto.quote | values">{{ele.price}}</td>
-                  <td *ngFor="let ele of crypto.quote | values">
-                      <span [ngStyle]="getStyle(ele.percent_change_1h)">{{ele.percent_change_1h}}</span>
-                    </td>
-              </tr>
-            </tbody>
-          </table>
--->
-
-
             <div>
                 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
                     <ng-container matColumnDef="check">
-                        <th mat-header-cell *matHeaderCellDef><!--span class="text-white close-check" (click)="addCheckBehave()"> X </span--></th>
+                        <th mat-header-cell *matHeaderCellDef><span class="text-white close-check" (click)="removeCheck()"> X </span></th>
                         <td class="text-center" mat-cell *matCellDef="let element">
                             <input type="checkbox" class="select-item" (change)="checkSelected(element.id)" id="element.id">
                         </td>
@@ -278,7 +230,7 @@
                             </span></td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr class="tr-click" (click)="removeCheckBehave()" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr class="tr-click" long-press (onLongPress)="lonPressHappened()" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                 </table>
 
@@ -297,17 +249,6 @@
                 <mat-paginator [pageSizeOptions]="[10, 25, 50, 75, 100]" (page)="clearSelected()"></mat-paginator>
                 <!--showFirstLastButtons-->
             </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
             <!-- SPINNERS OR LOADERS -->

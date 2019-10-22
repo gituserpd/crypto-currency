@@ -34,31 +34,44 @@ export class ListViewComponent implements OnInit {
   public dataSource:any;
   // public allData:PeriodicEle ment = []
   // dataSource = new MatTableDataSource<PeriodicElement>(this.allData);
-  displayedColumns: string[] = ['check','fav','logo','name','market_cap','price','change'];
+  displayedColumns: string[] = ['fav','logo','name','market_cap','price','change'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
 
   // For Long Press
-  // @ViewChild('trpress') tr: ElementRef;
-  // longPress = 'first state';
-  // longPressing = 0;
-  // isLongPressed = false;
+  @ViewChild('trpress') tr: ElementRef;
+  public longPress:number = 1;
+  public longPressing = 0;
+  public isLongPressed = false;
 
   constructor(public cryptoService: CryptoService, private router: Router, private elRef:ElementRef, private renderer:Renderer2) {
     console.log("List View Component");
   }
 
-  @HostListener('click')
-  public addCheckBehave = ()=>{
-    // const element = this.renderer.selectRootElement('.select-item');
-    // this.renderer.setAttribute(element,'disabled','true');
-    // this.renderer.setAttribute(this.elRef.nativeElement,'disabled','true'); //For Add Attribute
+  // @HostListener('click')
+public lonPressHappened = ()=>{
+  this.isLongPressed = !this.isLongPressed;
+  this.isLongPressed ? this.addCheck() : this.removeCheck(); //optional
+  this.longPress = this.isLongPressed ? 2 : 1; //optional
+}
+
+  public addCheck = ()=>{
+      this.longPressing = null;
+      // if (this.isLongPressed){
+        if(this.displayedColumns.length===6){
+          this.displayedColumns.unshift('check');
+          // console.log(this.displayedColumns)
+        }
   }
-  @HostListener('click')
-  public removeCheckBehave = ()=>{
-    // const element = this.renderer.selectRootElement('.select-item');
-    // this.renderer.removeAttribute(element,'disabled'); //For remove
+  // @HostListener('click')
+  public removeCheck = ()=>{
+    if(this.displayedColumns.length===7){
+      this.displayedColumns.shift();
+      // console.log(this.displayedColumns)
+      this.clearSelected();
+    }
+    this.longPress = 1;
   }
 
   ngOnInit() {
@@ -67,12 +80,6 @@ export class ListViewComponent implements OnInit {
     this.clearSelected();
   }
 
-
-  public forMatTable= (data:string[])=>{
-    this.dataSource = new MatTableDataSource(data);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  }
 
   public allFavoriteData: any = (ids: number[], convert: string) => {
     this.success = 0;
@@ -238,14 +245,33 @@ export class ListViewComponent implements OnInit {
   }
   */
 
- public doFilterPrice(value:any){
-   console.log("Price: "+value);
-   this.dataSource.filter = value.trim().toLowerCase();
+  public nameFilter:string;
+
+ public forMatTable= (data:string[])=>{
+  this.dataSource = new MatTableDataSource(data);
+  this.dataSource.sort = this.sort;
+  this.dataSource.paginator = this.paginator;
+}
+
+
+ public doFilterPrice(filterValue:any){
+   console.log("Price: "+filterValue);
+   this.dataSource.filter = filterValue.toString().trim().toLowerCase();
+    // let price = quote[this.convert].price.toString();
+    this.dataSource.filterPredicate =(data: any, filter: any) => 
+      data.quote[this.convert].price.toString().trim().toLowerCase().indexOf(filter) != -1;
  }
  public doFilterMarket(value:any){
   console.log("Market: "+value);
-  this.dataSource.filter = value.trim().toLowerCase();
+  this.dataSource.filter = value.toString().trim().toLowerCase();
+    this.dataSource.filterPredicate =(data: any, filter: any) =>
+    // let market_cap = quote[this.convert].market_cap.toString();
+      data.quote[this.convert].market_cap.toString().trim().toLowerCase().indexOf(filter) != -1;
 }
-
+public doFilterName(value:any){
+  this.dataSource.filter = value;
+    this.dataSource.filterPredicate =(data: any, filter: any) => 
+      data.name.trim().toLowerCase().indexOf(filter) != -1;
+}
 
 } //END OF MAIN CLASS

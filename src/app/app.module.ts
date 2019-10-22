@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ValuesPipe } from './values.pipe';
 import { PriceChartComponent } from './price-chart/price-chart.component';
-import { LongPress } from 'long-press';
+import { LongPress } from './long-press';
 import { FavLogoComponent } from './fav-logo/fav-logo.component';
 import { CompareComponent } from './compare/compare.component';
 

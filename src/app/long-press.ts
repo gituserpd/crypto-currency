@@ -31,8 +31,8 @@ export class LongPress {
             this.onLongPress.emit(event);
             this.interval = setInterval(() => {
                 this.onLongPressing.emit(event);
-            }, 50);
-        }, 500);
+            }, 30);
+        }, 300);
     }
 
     @HostListener('touchend')
