@@ -163,10 +163,12 @@
                         <button class="btn btn-sm btn-outline-secondary" type="button"
                             (click)="doFilterMarket(market_range)" disabled>APPLY</button>
                     </div> -->
-                    <div class="input-group nav-item">
-                        <label for="name_filter" class="range_op" style="min-width: 100px;">FIND NAME</label>
-                        <input type="text" name="nameFilter" [(ngModel)]="nameFilter" 
-                        (keyup)="doFilterName($event.target.value)" id="name_filter" style="border-radius: 10px; margin-left: 5px; background: rgb(186, 253, 244);">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">SEARCH NAME</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="bitcoin" aria-label="Username" aria-describedby="basic-addon1"
+                            name="nameFilter" [(ngModel)]="nameFilter" (keyup)="doFilterName($event.target.value)">
                     </div>
                 </form>
             </div>
