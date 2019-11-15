@@ -15,9 +15,9 @@ export class CryptoService {
    }
 
   //  public uri = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=5000&convert=INR"  //url with Parameters
-  // public baseUrl:any = "https://pro-api.coinmarketcap.com/v1/cryptocurrency"; //if not using proxy
-  // public baseUrl:any = "v1/cryptocurrency/listings/latest"; //FOR Proxy Server
-  public baseUrl:any = "v1/cryptocurrency";
+  public baseUrl:any = "https://pro-api.coinmarketcap.com/v1/cryptocurrency"; //if not using proxy
+  // public baseUrl:any = "v1/cryptocurrency/listings/latest";
+  // public baseUrl:any = "v1/cryptocurrency"; //FOR Proxy Server
 
   public apiKey:any = "c9107fc2-1c21-4328-83b8-fea6d40e6451";
 
